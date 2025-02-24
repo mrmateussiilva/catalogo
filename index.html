@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Painéis Sublimados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+	
+
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <h1 class="text-2xl font-bold text-indigo-600">Catálogo de Painéis</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-700 hover:text-indigo-600">Início</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-indigo-600">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section>
+    	<div id="carouselExample" class="relative w-full overflow-hidden">
+  <!-- Slides -->
+  <div class="relative w-full h-64 md:h-96">
+    <div class="absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out transform" id="carouselSlides">
+      <div class="w-full h-full bg-red-800 flex items-center justify-center">Slide 1</div>
+      <div class="w-full h-full bg-blue-800 flex items-center justify-center">Slide 2</div>
+      <div class="w-full h-full bg-green-500 flex items-center justify-center">
+      	dfsfdf
+      </div>
+    </div>
+  </div>
+  
+  <!-- Navegação -->
+  <button class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg" id="prevBtn">‹</button>
+  <button class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg" id="nextBtn">›</button>
+</div>
+
+
+
+<script>
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const slides = document.getElementById("carouselSlides");
+  let currentSlide = 0;
+
+  function goToSlide(slideIndex) {
+    const totalSlides = slides.children.length;
+    if (slideIndex < 0) slideIndex = totalSlides - 1;
+    if (slideIndex >= totalSlides) slideIndex = 0;
+    slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    currentSlide = slideIndex;
+  }
+
+  prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
+  nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+
+  // Para iniciar o carrossel automaticamente
+  setInterval(() => {
+    goToSlide(currentSlide + 1);
+  }, 500);
+</script>
+
+    </section>
+    <section class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold text-center text-gray-800">Explore nossos painéis</h2>
+        
+        <!-- Filtro de Categorias -->
+        <div class="mt-6 flex justify-center">
+            <select id="filter" class="p-2 border rounded-md">
+                <option value="all">Todos</option>
+                <option value="Mundo Bita">Infantil</option>
+                <option value="Mickey">Natureza</option>
+                <option value="abstrato">Abstrato</option>
+            </select>
+        </div>
+
+        <!-- Grid de Painéis -->
+        <div id="panel-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6"></div>
+    </section>
+
+    <script>
+        const panels = [
+            { id: 1, name: "Painel Infantil", category: "infantil", image: "https://via.placeholder.com/300" },
+            { id: 2, name: "Painel Natureza", category: "natureza", image: "https://via.placeholder.com/300" },
+            { id: 3, name: "Painel Abstrato", category: "abstrato", image: "https://via.placeholder.com/300" }
+        ];
+
+        function renderPanels() {
+            const grid = document.getElementById('panel-grid');
+            grid.innerHTML = '';
+            panels.forEach(panel => {
+                const panelItem = document.createElement('div');
+                panelItem.className = `bg-white p-4 rounded-lg shadow-md panel-item`;
+                panelItem.setAttribute('data-category', panel.category);
+                panelItem.innerHTML = `
+                    <img src="${panel.image}" alt="${panel.name}" class="w-full h-48 object-cover rounded-md">
+                    <h3 class="text-lg font-bold mt-2">${panel.name}</h3>
+                    <button class="mt-2 w-full bg-blue-500 text-white py-2 rounded-md font-semibold" onclick="showInfo('${panel.name}')">Mais Informações</button>
+                    <a href="https://wa.me/?text=Quero+mais+informações+sobre+${encodeURIComponent(panel.name)}" target="_blank" class="mt-2 block text-center bg-green-500 text-white py-2 rounded-md font-semibold">Pedir no Zap</a>
+                `;
+                grid.appendChild(panelItem);
+            });
+        }
+
+        document.getElementById('filter').addEventListener('change', function() {
+            const category = this.value;
+            document.querySelectorAll('.panel-item').forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        function showInfo(name) {
+            alert(`Mais informações sobre: ${name}`);
+        }
+
+        renderPanels();
+    </script>
+</body>
+</html>
