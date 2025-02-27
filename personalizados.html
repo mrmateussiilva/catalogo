@@ -1,40 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Painéis</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let index = 0;
-            const images = [
-                "https://via.placeholder.com/1200x400?text=Promoção+1",
-                "https://via.placeholder.com/1200x400?text=Promoção+2",
-                "https://via.placeholder.com/1200x400?text=Promoção+3"
-            ];
-            const carouselImage = document.getElementById("carousel-image");
-            
-            function changeImage() {
-                index = (index + 1) % images.length;
-                carouselImage.src = images[index];
-            }
-            setInterval(changeImage, 3000);
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalização de Imagem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1  class="text-xl font-bold text-purple-700">Catálogo de Painéis</h1>
-        <ul class="flex space-x-4">
-            <li><a href="index.html" class="text-orange-500 hover:text-orange-600 transition duration-300">Inicio</a></li>
-            <li><a href="paineis.html" class="text-orange-500 hover:text-orange-600 transition duration-300">Painéis Redondos</a></li>
-            <li><a href="toalhas.html" class="text-orange-500 hover:text-orange-600 transition duration-300">Toalhas</a></li>
-            <li><a href="personalizados.html" class="text-orange-500 hover:text-orange-600 transition duration-300">Personalizados</a></li>
-            <li><a href="promocoes.html" class="text-orange-500 hover:text-orange-600 transition duration-300">Promoções</a></li>
-        </ul>
-    </nav>
+<body class="bg-gray-100 h-screen flex">
+    
+
+<div class="w-1/2 p-10 bg-white shadow-md">
+  <h1 class="text-3xl font-bold mb-10 text-purple-600">Personalize sua Imagem</h1>
+
+  <div class="mb-5">
+    <label for="imageSelect" class="block mb-2 text-lg">Escolha uma imagem:</label>
+    <select id="imageSelect" class="border rounded p-2 w-full">
+ 
+        <option value="images/toalhas/TOALHA 1.jpg">Imagem 1</option>
+        <option value="images/toalhas/TOALHA 4.jpg">Imagem 2</option>
+    </select>
+  </div>
+
+  <div class="mb-5">
+    <label for="textInput" class="block mb-2 text-lg">Digite seu texto:</label>
+    <input type="text" id="textInput" class="border rounded p-2 w-full">
+  </div>
+
+  <button onclick="updatePreview()" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+    Visualizar
+  </button>
+</div>
+
+<div class="w-1/2 flex items-center justify-center bg-gray-200">
+  <div class="relative w-[500px] h-[700px] border-2 border-purple-600 shadow-lg">
+    <img id="previewImage" src="" alt="Preview" class="w-1/2 center object-cover">
+    <div id="previewText" class="absolute w-full text-center text-2xl font-bold text-black" style="bottom: 30cm;"></div>
+  </div>
+</div>
+
+<script>
+  function updatePreview() {
+    const image = document.getElementById("imageSelect").value;
+    const text = document.getElementById("textInput").value;
+    const previewImage = document.getElementById("previewImage");
+    const previewText = document.getElementById("previewText");
+
+    previewImage.src = image;
+    previewText.textContent = text;
+
+    const imageHeight = previewImage.clientHeight;
+    const textPosition = imageHeight - (30 / 2.54 * 37.8); // Convertendo 30cm para pixels
+    previewText.style.top = `${350}px`;
+    previewText.style.fontSize = "2.5em";
+    previewText.style.color = `red`;
+    previewText.style.right = `${125}px`;
+  }
+</script>
 
 </body>
 </html>
+
