@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tamanho = document.getElementById("select-tamanho").value;
         const tecido = document.getElementById("select-tecido").value;
         let mensagem = `Olá, gostaria de pedir o painel: ${pedido.nome}%0A `
-        mensagem += `Tecido: ${tecido}%0A Tamanho: ${tamanho}%0A Tamanho: ${tamanho}`
+        mensagem += `Tecido: ${tecido}%0A Tamanho: ${tamanho}%0A`
         mensagem += `%0A Código:${pedido.imagem}%0A `
         window.open(`https://wa.me/5527995900071?text=${mensagem}`, '_blank');
     };
